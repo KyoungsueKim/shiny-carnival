@@ -39,5 +39,10 @@ int main(void){
         sensor();
     }
 
+    // 3번 라즈베리파이
+    if (strcmp(getUUID(), "9713a22a4fcc4ae58e1fe2f9f301c82") == 0){
+        printf("Raspberry Pi 3 Initialized!\n");
+    }
+
     return 0;
 }
