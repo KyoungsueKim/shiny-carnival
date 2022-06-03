@@ -26,7 +26,6 @@ static char* getUUID(){
 }
 
 int main(void){
-    if (wiringPiSetup() == -1) return 1; // wiringPi 셋업.
 
     // 1번 라즈베리파이
     if (strcmp(getUUID(), "401d9479da094aa6a86b4e18d9bf676") == 0){

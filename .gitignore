@@ -32,4 +32,5 @@
 *.app
 
 shiny-carnival/build/
-shiny-carnival/bin/
+shiny-carnival/bin
+build/
