@@ -18,7 +18,7 @@ static char* getUUID(){
     FILE* uuid_file = fopen("/etc/machine-id", "r");
     fgets(uuid, 32, uuid_file);
 
-    printf("Device ID : %s\n", uuid);
+    // printf("Device ID : %s\n", uuid);
 
     fclose(uuid_file);
 
@@ -27,6 +27,12 @@ static char* getUUID(){
 
 int main(void){
     if (wiringPiSetup() == -1) return 1; // wiringPi 셋업.
+
+    // 1번 라즈베리파이
+    if (strcmp(getUUID(), "401d9479da094aa6a86b4e18d9bf676") == 0){
+        printf("Raspberry Pi 1 Initialized!\n");
+    }
+
 
     // 2번 라즈베리파이
     if (strcmp(getUUID(), "316ae05cfd87495fa67a75f8ec53365") == 0){
