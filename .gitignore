@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+shiny-carnival/build/
+shiny-carnival/bin/
