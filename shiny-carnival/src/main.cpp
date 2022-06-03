@@ -36,6 +36,7 @@ int main(void){
     // 2번 라즈베리파이
     if (strcmp(getUUID(), "316ae05cfd87495fa67a75f8ec53365") == 0){
         printf("Raspberry Pi 2 Initialized!\n");
+        sensor();
     }
 
     return 0;
