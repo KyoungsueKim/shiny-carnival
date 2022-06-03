@@ -40,7 +40,7 @@ int main(void){
 
     // 3번 라즈베리파이
     if (strcmp(getUUID(), "316ae05cfd87495fa67a75f8ec53365") == 0){
-        printf("Raspberry Pi 2 Initialized!\n");
+        printf("Raspberry Pi 3 Initialized!\n");
     }
 
     return 0;
