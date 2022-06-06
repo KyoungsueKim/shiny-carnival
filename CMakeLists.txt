@@ -10,5 +10,9 @@ set(SRC_DIRECTORY ${CMAKE_SOURCE_DIR}/shiny-carnival/src)
 
 add_executable(main ${SRC_DIRECTORY}/main.cpp ${SRC_DIRECTORY}/piezo.cpp ${SRC_DIRECTORY}/sensor.cpp ${SRC_DIRECTORY}/pwm.cpp ${SRC_DIRECTORY}/gpio.cpp ${SRC_DIRECTORY}/socket.cpp)
 
-target_link_libraries(main opencv_core)
+SET(OpenCV_DIR /usr/local/include/opencv2/)
+find_package(OpenCV REQUIRED)
+
+include_directories(/usr/local/include/opencv2/)
+target_link_libraries(main pthread ${OpenCV_LIBS})
 # add_executable(main ${SRC_DIRECTORY}/main.cpp)
