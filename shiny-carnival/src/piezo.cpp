@@ -21,16 +21,18 @@ void* Melody::playMelody(float duration){
 
 void* Melody::piezo(int scale, float duration){
 
-    if (scale == 0){
-        PWMWriteDutyCycle(0, 0); // mute
+    if (scale == 0){ // if mute
+        PWMWriteDutyCycle(0, 0); 
     } 
     else {
         PWMWritePeriod(0, (1000000 / scale) * 1000);
         PWMWriteDutyCycle(0, ((1000000 / 2) / 261));
     }
 
+    // maintain scale for duration 
     usleep((int)(1000000 * duration));
 
+    // mute
     PWMWriteDutyCycle(0, 0);
     usleep(10000);
 
