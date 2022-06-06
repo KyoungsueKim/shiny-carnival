@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <wiringPi.h>
 #include <string.h>
 #include "camera.h"
 #include "piezo.h"
@@ -30,8 +29,10 @@ int main(void){
     // 1번 라즈베리파이
     if (strcmp(getUUID(), "401d9479da094aa6a86b4e18d9bf676") == 0){
         printf("Raspberry Pi 1 Initialized!\n");
-    }
 
+        Melody warning = Melody();
+        warning.playMelody();
+    }
 
     // 2번 라즈베리파이
     if (strcmp(getUUID(), "316ae05cfd87495fa67a75f8ec53365") == 0){

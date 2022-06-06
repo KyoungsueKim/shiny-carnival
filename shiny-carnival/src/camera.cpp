@@ -1,4 +1,1 @@
 #include "camera.h"
-
-
-

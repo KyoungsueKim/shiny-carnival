@@ -6,9 +6,10 @@ cmake_minimum_required(VERSION 3.10)
 project(shiny-carnival)
 # set(CMAKE_VERBOSE_MAKEFILE true)
 set(RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
+set(SRC_DIRECTORY ${CMAKE_SOURCE_DIR}/shiny-carnival/src)
  
-add_executable(main ${CMAKE_SOURCE_DIR}/shiny-carnival/src/main.cpp ${CMAKE_SOURCE_DIR}/shiny-carnival/src/piezo.cpp ${CMAKE_SOURCE_DIR}/shiny-carnival/src/sensor.cpp)
-# add the executable
+add_executable(main ${SRC_DIRECTORY}/main.cpp ${SRC_DIRECTORY}/piezo.cpp ${SRC_DIRECTORY}/sensor.cpp ${SRC_DIRECTORY}/pwm.cpp ${SRC_DIRECTORY}/gpio.cpp)
 
+# add the executable
 target_include_directories(main PUBLIC ${CMAKE_SOURCE_DIR}/src)
 
