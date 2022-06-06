@@ -117,8 +117,8 @@ int GPIOWrite(int pin, int value) {
    if (1 != write(fd, &s_values_str[LOW == value ? 0 : 1], 1)) {
 	  fprintf(stderr, "Failed to write value!\n");
 	  return(-1);
+   }
 
    close(fd);
    return(0);
-   }
 }
