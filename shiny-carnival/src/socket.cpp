@@ -35,7 +35,8 @@ ServerSocket::ServerSocket() {
     }
 
     // Accept from client request
-    socklen_t clientAddressSize = sizeof(clientData[0].fd) / CLIENT_NUMBERS;
+    // socklen_t clientAddressSize = sizeof(clientData[0].fd) / CLIENT_NUMBERS;
+    socklen_t clientAddressSize = sizeof(clientData[0]);
     for (int i = 0; i < CLIENT_NUMBERS; i++) {
         // Accepting (Getting client file descriptor)
         clientData[i].fd = accept(serverFileDescriptor, (struct sockaddr *)&clientAddress[i], &clientAddressSize);
