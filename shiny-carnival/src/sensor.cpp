@@ -9,169 +9,124 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include <pthread.h>
+//#include <pthread.h>
 #include <time.h>
 
 #define IN 0
 #define OUT 1
 #define LOW 0
 #define HIGH 1
-#define POUT 23
-#define PIN 24
 #define VALUE_MAX 45
 #define DIRECTION_MAX 45
 #define DISTANCE 10
 #define BUFFER_MAX 3
 
-static int GPIOExport(int pin) {
-#define BUFFER_MAX 3
-   char buffer[BUFFER_MAX];
-   ssize_t bytes_written;
-   int fd;
-
-   fd = open("/sys/class/gpio/export", O_WRONLY);
-   if (-1 == fd) {
-	  fprintf(stderr, "Failed to open export for writing!\n");
-	  return(-1);
-   }
-
-   bytes_written = snprintf(buffer, BUFFER_MAX, "%d", pin);
-   write(fd, buffer, bytes_written);
-   close(fd);
-   return(0);
-}
-
-static int GPIOUnexport(int pin) {
-   char buffer[BUFFER_MAX];
-   ssize_t bytes_written;
-   int fd;
-
-   fd = open("/sys/class/gpio/unexport", O_WRONLY);
-   if (-1 == fd) {
-	  fprintf(stderr, "Failed to open unexport for writing!\n");
-	  return(-1);
-   }
-
-   bytes_written = snprintf(buffer, BUFFER_MAX, "%d", pin);
-   write(fd, buffer, bytes_written);
-   close(fd);
-   return(0);
-}
-
-static int GPIODirection(int pin, int dir) {
-   static const char s_directions_str[]  = "in\0out";
-
-   //char path[DIRECTION_MAX]="/sys/class/gpio/gpio24/direction";
-   char path[DIRECTION_MAX]="/sys/class/gpio/gpio%d/direction";
-   int fd;
-
-   snprintf(path, DIRECTION_MAX, "/sys/class/gpio/gpio%d/direction", pin);
-
-   fd = open(path, O_WRONLY);
-   if (-1 == fd) {
-	  fprintf(stderr, "Failed to open gpio direction for writing!\n");
-	  return(-1);
-   }
-
-   if (-1 == write(fd, &s_directions_str[IN == dir ? 0 : 3], IN == dir ? 2 : 3)) {
-	  fprintf(stderr, "Failed to set direction!\n");
-	  return(-1);
-   }
-
-   close(fd);
-   return(0);
-}
-
-static int GPIORead(int pin) {
-   char path[VALUE_MAX];
-   char value_str[4];
-   int fd;
-
-   snprintf(path, VALUE_MAX, "/sys/class/gpio/gpio%d/value", pin);
-   fd = open(path, O_RDONLY);
-   if (-1 == fd) {
-	  fprintf(stderr, "Failed to open gpio value for reading!\n");
-	  return(-1);
-   }
-
-   if (-1 == read(fd, value_str, 3)) {
-	  fprintf(stderr, "Failed to read value!\n");
-	  return(-1);
-   }
-
-   close(fd);
-
-   return(atoi(value_str));
-}
-
-static int GPIOWrite(int pin, int value) {
-   static const char s_values_str[] = "01";
-
-   char path[VALUE_MAX];
-   int fd;
-
-   snprintf(path, VALUE_MAX, "/sys/class/gpio/gpio%d/value", pin);
-   fd = open(path, O_WRONLY);
-   if (-1 == fd) {
-	  fprintf(stderr, "Failed to open gpio value for writing!\n");
-	  return(-1);
-   }
-
-   if (1 != write(fd, &s_values_str[LOW == value ? 0 : 1], 1)) {
-	  fprintf(stderr, "Failed to write value!\n");
-	  return(-1);
-
-   close(fd);
-   return(0);
-   }
-}
 
 void sensor(){
-    #define LED 24
-    #define SENSOR 25
+    #define LED1 22
+    #define SENSOR1 23
+    #define LED2 24
+    #define SENSOR2 25
+    #define LED3 5
+    #define SENSOR3 6
 
-   if(-1 == GPIOExport(LED))
-        return;
-
-   if(-1 == GPIOExport(SENSOR))
-        return;
-
-   if(-1 == GPIODirection(LED, OUT))
-   {
-        printf("LED dir error\n");
-        return;
-   }
-
-    if(-1 == GPIODirection(SENSOR, IN))
+    if(-1 == GPIOExport(LED1))
     {
-        printf("SENSOR dir error\n");
+        printf("LED1 Export error\n");
         return;
     }
 
-    GPIOWrite(LED, LOW);
+    if(-1 == GPIOExport(LED2))
+    {
+        printf("LED2 Export error\n");
+        return;
+    }
+
+    if(-1 == GPIOExport(LED3))
+    {
+        printf("LED3 Export error\n");
+        return;
+    }
+
+    if(-1 == GPIOExport(SENSOR1))
+    {
+        printf("SENSOR1 Export error\n");
+        return;
+    }
+
+    if(-1 == GPIOExport(SENSOR2))
+    {
+        printf("SENSOR2 Export error\n");
+        return;
+    }
+    
+    if(-1 == GPIOExport(SENSOR3))
+    {
+        printf("SENSOR3 Export error\n");
+        return;
+    }
+
+    if(-1 == GPIODirection(LED1, OUT))
+    {
+        printf("LED1 dir error\n");
+        return;
+    }
+
+    if(-1 == GPIODirection(SENSOR1, IN))
+    {
+        printf("SENSOR1 dir error\n");
+        return;
+    }
+
+    if(-1 == GPIODirection(LED2, OUT))
+    {
+        printf("LED2 dir error\n");
+        return;
+    }
+
+    if(-1 == GPIODirection(SENSOR2, IN))
+    {
+        printf("SENSOR2 dir error\n");
+        return;
+    }
+
+    if(-1 == GPIODirection(LED3, OUT))
+    {
+        printf("LED3 dir error\n");
+        return;
+    }
+
+    if(-1 == GPIODirection(SENSOR3, IN))
+    {
+        printf("SENSOR3 dir error\n");
+        return;
+    }
+
+    
+    GPIOWrite(LED2, LOW);
     int i = 0;
     int test = 100000;
 
     while(test--)
     {
-        int isDetected = GPIORead(SENSOR);
+        int isDetected = GPIORead(SENSOR2);
         if(!isDetected)
         {
-            GPIOWrite(LED, LOW);
-            printf("LED OFF : %d\n",i);
+            GPIOWrite(LED2, LOW);
+            printf("LED2 OFF : %d\n",i);
             i++;
         }
         else
         {
-            GPIOWrite(LED, HIGH);
-            printf("LED ON : %d\n",i);
+            GPIOWrite(LED2, HIGH);
+            printf("LED2 ON : %d\n",i);
             i++;
         }
         usleep(50);
     }
     
-    if(-1 == GPIOUnexport(SENSOR))
+    if(-1 == GPIOUnexport(SENSOR2))
         return;
-    if(-1 == GPIOUnexport(LED))
+    if(-1 == GPIOUnexport(LED2))
         return;
 }
