@@ -30,8 +30,16 @@ int main(void){
     if (strcmp(getUUID(), "401d9479da094aa6a86b4e18d9bf676") == 0){
         printf("Raspberry Pi 1 Initialized!\n");
 
+        Melody basic = Melody();
+        basic.playMelody(0.3);
+
+        Melody airplain = Melody();
+        airplain.melody = {E, D, C, D, E, E, E, ZERO, D, D, D, ZERO, E, G, G, ZERO, E, D, C, D, E, E, E, ZERO, D, D, E, D, C};
+        airplain.playMelody(0.3);
+
         Melody warning = Melody();
-        warning.playMelody();
+        warning.melody = {E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, lowG, lowB, C, ZERO, ZERO, E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, C, lowB, lowA, ZERO, ZERO};
+        warning.playMelody(0.3);
     }
 
     // 2번 라즈베리파이

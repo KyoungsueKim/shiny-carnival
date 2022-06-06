@@ -5,12 +5,12 @@
 #include "pwm.h"
 #include "piezo.h"
 
-void* Melody::playMelody(){
+void* Melody::playMelody(float duration){
     // PWM 0 Initialize
     if (PWMExport(0) == 0 && PWMEnable(0) == 0) {
         // play
         for (int i = 0; i < melody.size(); i++) {
-            piezo(melody[i], 1);
+            piezo(melody[i], duration);
         }
 
         PWMWriteDutyCycle(0, 0); // mute
@@ -21,9 +21,18 @@ void* Melody::playMelody(){
 
 void* Melody::piezo(int scale, float duration){
 
-    PWMWritePeriod(0, (1000000 / scale) * 1000);
-    PWMWriteDutyCycle(0, ((1000000 / 2) / 261));
+    if (scale == 0){
+        PWMWriteDutyCycle(0, 0); // mute
+    } 
+    else {
+        PWMWritePeriod(0, (1000000 / scale) * 1000);
+        PWMWriteDutyCycle(0, ((1000000 / 2) / 261));
+    }
+
     usleep((int)(1000000 * duration));
+
+    PWMWriteDutyCycle(0, 0);
+    usleep(10000);
 
     return NULL; 
 }
