@@ -30,6 +30,19 @@ typedef enum Scale
     highC = 1047
 } Scale;
 
+/***
+ * Usage: 
+ *      Melody basic = Melody();
+        basic.playMelody(0.3);
+
+        Melody airplain = Melody();
+        airplain.melody = {E, D, C, D, E, E, E, ZERO, D, D, D, ZERO, E, G, G, ZERO, E, D, C, D, E, E, E, ZERO, D, D, E, D, C};
+        airplain.playMelody(0.3);
+
+        Melody warning = Melody();
+        warning.melody = {E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, lowG, lowB, C, ZERO, ZERO, E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, C, lowB, lowA, ZERO, ZERO};
+        warning.playMelody(0.3);
+ */
 class Melody {
     public:
         std::vector<int> melody = { C, D, E, F, G, A, B, highC };
