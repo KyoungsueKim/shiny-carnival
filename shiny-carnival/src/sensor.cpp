@@ -1,16 +1,7 @@
+#include "gpio.h"
 #include "sensor.h"
-
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <fcntl.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-//#include <pthread.h>
-#include <time.h>
 
 #define IN 0
 #define OUT 1
@@ -20,7 +11,6 @@
 #define DIRECTION_MAX 45
 #define DISTANCE 10
 #define BUFFER_MAX 3
-
 
 void sensor(){
     #define LED1 22

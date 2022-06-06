@@ -1,5 +1,9 @@
+#include <pthread.h>
+#incldue 
 #include "piezo.h"
 
-int foo(){
-    return 3;
+// pin 2 -> piezo
+
+void* playPiezo(){
+    
 }
