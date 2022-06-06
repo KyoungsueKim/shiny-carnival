@@ -2,6 +2,7 @@
 #include "sensor.h"
 #include <stdio.h>
 #include <unistd.h>
+#include "socket.h"
 
 #define IN 0
 #define OUT 1
@@ -13,12 +14,13 @@
 #define BUFFER_MAX 3
 
 void sensor(){
-    #define LED1 22
-    #define SENSOR1 23
-    #define LED2 24
-    #define SENSOR2 25
-    #define LED3 5
-    #define SENSOR3 6
+    #define LED1 5
+    #define SENSOR1 6
+    #define LED2 22
+    #define SENSOR2 23
+    #define LED3 24
+    #define SENSOR3 25
+
 
     if(-1 == GPIOExport(LED1))
     {
@@ -92,27 +94,55 @@ void sensor(){
         return;
     }
 
-    
+    GPIOWrite(LED1, LOW);
     GPIOWrite(LED2, LOW);
+    GPIOWrite(LED3, LOW);
+
     int i = 0;
-    int test = 100000;
+    int test = 10000000;
 
     while(test--)
     {
-        int isDetected = GPIORead(SENSOR2);
-        if(!isDetected)
+        int isDetected1 = GPIORead(SENSOR1);
+        //int isDetected2 = GPIORead(SENSOR2);
+       // int isDetected3 = GPIORead(SENSOR3);
+
+        if(isDetected1)
         {
-            GPIOWrite(LED2, LOW);
-            printf("LED2 OFF : %d\n",i);
+            GPIOWrite(LED1, HIGH);
+            printf("LED1 ON : %d\n",i);
             i++;
         }
-        else
-        {
-            GPIOWrite(LED2, HIGH);
-            printf("LED2 ON : %d\n",i);
+        else{
+            GPIOWrite(LED1, LOW);
+            printf("LED off : %d\n",i);
             i++;
         }
-        usleep(50);
+        usleep(10000);
+
+        // if(isDetected2)
+        // {
+
+        // }
+        // if(isDetected3)
+        // {
+
+        // }
+
+        // if(!isDetected1)
+        // {
+        //     GPIOWrite(LED2, LOW);
+        //     printf("LED2 OFF : %d\n",i);
+        //     i++;
+        // }
+        // else
+        // {
+        //     GPIOWrite(LED2, HIGH);
+        //     printf("LED2 ON : %d\n",i);
+        //     i++;
+        // }
+        // usleep(50);
+
     }
     
     if(-1 == GPIOUnexport(SENSOR2))
