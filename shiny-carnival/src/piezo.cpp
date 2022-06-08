@@ -5,6 +5,10 @@
 #include "pwm.h"
 #include "piezo.h"
 
+Melody::~Melody() {
+    PWMWriteDutyCycle(0, 0);// mute
+}
+
 void* Melody::playMelody(float duration){
     // PWM 0 Initialize
     if (PWMExport(0) == 0 && PWMEnable(0) == 0) {

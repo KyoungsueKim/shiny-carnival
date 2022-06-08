@@ -44,8 +44,13 @@ typedef enum Scale
         warning.playMelody(0.3);
  */
 class Melody {
+    private:
+
     public:
+        // basic melody
         std::vector<int> melody = { C, D, E, F, G, A, B, highC };
+
+        ~Melody();
 
         /*** 
         * Melody 오브젝트의 melody 변수에 기록된 멜로디에 따라 음을 재생합니다. 
