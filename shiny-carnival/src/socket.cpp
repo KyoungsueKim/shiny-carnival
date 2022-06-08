@@ -60,14 +60,14 @@ ServerSocket::~ServerSocket(){
     close(serverFileDescriptor);
 }
 
-int ServerSocket::receiveDataFromClient(client client){
+const char* ServerSocket::readDataFromClient(client client){
     printf("Client IP: %s Connected\n", client.ip);
 
     char buffer[5];
     read(client.fd, buffer, sizeof(buffer));
 
-    // 읽은 메시지가 하나라도 있다면 그대로 리턴. 아니라면 0 리턴
-    return atoi(buffer) > 0 ? atoi(buffer) : 0;
+    // 읽은 메시지가 하나라도 있다면 그대로 리턴. 아니라면 nullptr 리턴
+    return atoi(buffer) > 0 ? buffer : nullptr;
 }
 
 

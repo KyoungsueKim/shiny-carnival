@@ -1,5 +1,7 @@
 #include <arpa/inet.h>
 
+#define CLIENT_NUMBERS 2
+
 typedef struct client{
 	int fd;
 	char ip[30];
@@ -7,7 +9,6 @@ typedef struct client{
 
 class ServerSocket {
     private:
-        #define CLIENT_NUMBERS 2
 
         int serverFileDescriptor;
         int receivedData;
@@ -20,7 +21,7 @@ class ServerSocket {
 
         ServerSocket();
         ~ServerSocket();
-        int receiveDataFromClient(client client);
+        const char* readDataFromClient(client client);
 };
 
 class ClientSocket {
