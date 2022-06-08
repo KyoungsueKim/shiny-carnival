@@ -1,17 +1,14 @@
 #include <opencv2/opencv.hpp>
 
-enum direction
-{
-    LEFT = 0,
-    FRONT = 1,
-    RIGHT = 2
+struct Directions{
+    bool right;
+    bool front;
+    bool left;
 };
 
 class Camera {
     private:
-        bool left = false;
-        bool front = false;
-        bool right = false;
+        Directions directions;
         bool interrupt = false;
 
         cv::Mat img;
@@ -19,6 +16,5 @@ class Camera {
     public:
         Camera();
         ~Camera();
-        void TurnOnGuide(int direction);
-        void TurnOffGuide(int direction);
+        int SetGuides(Directions directions);
 };

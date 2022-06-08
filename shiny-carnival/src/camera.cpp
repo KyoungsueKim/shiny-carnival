@@ -18,15 +18,15 @@ Camera::Camera (){
         transpose(img, img);
         flip(img, img, 1);
 
-        if(this->left){
+        if(this->directions.left){
             // 왼쪽 가이드 생성
             ellipse(img, cv::Point(0, 240), cv::Size(220.0, 70.0), 90, 0, 360, cv::Scalar(0, 0, 255), 5, 8);
         }
-        if(this->front){
+        if(this->directions.front){
             // 앞쪽 가이드 생성
             ellipse(img, cv::Point(320, 0),	 cv::Size(300.0, 70.0), 180, 0, 360, cv::Scalar(0, 0, 255), 5, 8);
         }
-        if(this->right){
+        if(this->directions.right){
             // 오른쪽 가이드 라인 생성
             ellipse(img, cv::Point(640, 240), cv::Size(220.0, 70.0), 90, 0, 360, cv::Scalar(0, 0, 255), 5, 8);
         }
@@ -43,41 +43,11 @@ Camera::~Camera() {
     this->interrupt = true;
 }
 
-void Camera::TurnOnGuide (int direction){
-    switch (direction)
-    {
-        case LEFT:
-            this->left = true;
-            break;
-
-        case RIGHT:
-            this->right = true;
-            break;
-
-        case FRONT:
-            this->front = true;
-            break;
-
-        default:
-            break;
-    }
-}
-
-void Camera::TurnOffGuide (int direction){
-    switch (direction){
-        case LEFT:
-            this->left = false;
-            break;
-
-        case RIGHT:
-            this->right = false;
-            break;
-
-        case FRONT:
-            this->front = false;
-            break;
-
-        default:
-            break;
+int Camera::SetGuides(Directions directions) {
+    this->directions = directions;
+    if(directions.left || directions.front || directions.right){
+        return 1;
+    } else {
+        return 0;
     }
 }
