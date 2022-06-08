@@ -8,7 +8,7 @@ project(shiny-carnival)
 set(RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/bin)
 set(SRC_DIRECTORY ${CMAKE_SOURCE_DIR}/shiny-carnival/src)
 
-add_executable(main ${SRC_DIRECTORY}/main.cpp ${SRC_DIRECTORY}/piezo.cpp ${SRC_DIRECTORY}/sensor.cpp ${SRC_DIRECTORY}/pwm.cpp ${SRC_DIRECTORY}/gpio.cpp ${SRC_DIRECTORY}/socket.cpp)
+add_executable(main ${SRC_DIRECTORY}/main.cpp ${SRC_DIRECTORY}/piezo.cpp ${SRC_DIRECTORY}/sensor.cpp ${SRC_DIRECTORY}/pwm.cpp ${SRC_DIRECTORY}/gpio.cpp ${SRC_DIRECTORY}/socket.cpp ${SRC_DIRECTORY}/camera.cpp)
 
 SET(OpenCV_DIR /usr/local/include/opencv2/)
 find_package(OpenCV REQUIRED)
