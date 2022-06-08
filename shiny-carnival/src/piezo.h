@@ -33,6 +33,7 @@ typedef enum Scale
 /***
  * Usage: 
  *      Melody basic = Melody();
+ *      basic.melody = { C, D, E, F, G, A, B, highC };
         basic.playMelody(0.3);
 
         Melody airplain = Melody();
@@ -45,18 +46,21 @@ typedef enum Scale
  */
 class Melody {
     private:
+        bool nowPlaying;
 
     public:
-        // basic melody
-        std::vector<int> melody = { C, D, E, F, G, A, B, highC };
+        // warning melody
+        std::vector<int> melody = {E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, lowG, lowB, C, ZERO, ZERO, E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, C, lowB, lowA, ZERO, ZERO};
 
         ~Melody();
 
         /*** 
-        * Melody 오브젝트의 melody 변수에 기록된 멜로디에 따라 음을 재생합니다. 
+        * Melody 오브젝트의 @melody 에 기록된 멜로디에 따라 음을 재생합니다.
         * @return : NULL 포인터
         */
-        void *playMelody(float duration);
+        static void playMelody(float duration);
+
+        static void stopMelody();
 
         /***
          * 피에조의 음을 재생합니다. 음계와 지속시간을 설정해줄 수 있습니다.

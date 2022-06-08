@@ -6,10 +6,16 @@
 #include "piezo.h"
 
 Melody::~Melody() {
-    PWMWriteDutyCycle(0, 0);// mute
+    stopMelody();
 }
 
-void* Melody::playMelody(float duration){
+void Melody::playMelody(float duration){
+    if (this->nowPlaying){
+        return;
+    } else {
+        this->nowPlaying = true;
+    }
+
     // PWM 0 Initialize
     if (PWMExport(0) == 0 && PWMEnable(0) == 0) {
         // play
@@ -19,8 +25,11 @@ void* Melody::playMelody(float duration){
 
         PWMWriteDutyCycle(0, 0); // mute
     }
+}
 
-    return NULL;
+void Melody::stopMelody() {
+    PWMWriteDutyCycle(0, 0); // mute
+    this->nowPlaying = false;
 }
 
 void* Melody::piezo(int scale, float duration){
