@@ -1,25 +1,27 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-struct Directions{
-    bool right;
-    bool front;
-    bool left;
+struct Directions
+{
+	bool right;
+	bool front;
+	bool left;
 };
 
 #include <opencv2/opencv.hpp>
 
-class Camera {
+class Camera
+{
 private:
-    Directions directions;
-    bool interrupt = false;
+	Directions directions;
+	bool interrupt = false;
 
-    cv::Mat img;
+	cv::Mat img;
 
 public:
-    Camera();
-    ~Camera();
-    int SetGuides(Directions directions);
+	Camera();
+	~Camera();
+	int SetGuides(Directions directions);
 };
 
 #endif

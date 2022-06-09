@@ -1,3 +1,3 @@
-static bool clientInterrupt = false;
+bool clientInterrupt = false;
 
 void StartClient(int mode);
