@@ -4,11 +4,6 @@
 
 int Camera::SetGuides(Directions directions) {
     this->directions = directions;
-    if(directions.left || directions.front || directions.right){
-        return 1;
-    } else {
-        return 0;
-    }
 }
 
 void Camera::DisplayCamera(){

@@ -29,7 +29,9 @@ void *DisplayCameraThread(void *args){
 	displayCameraThreadArguments *arguments = (displayCameraThreadArguments *)args;
 	Camera camera = arguments->camera;
 
-	camera.DisplayCamera();
+	while(1){
+		camera.DisplayCamera();
+	}
 }
 
 void *playPiezoThread(void *args)
@@ -63,7 +65,6 @@ void *ServerThread(void *args)
 	displayCameraThreadArguments displayCameraArguments = {.camera = camera};
 	pthread_create(&displayCameraThread, NULL, DisplayCameraThread, &displayCameraArguments);
 
-
 	ServerSocket serverSocket = ServerSocket();
 	for (int i = 0; i < sizeof(serverSocket.clientData) / sizeof(serverSocket.clientData[0]); i++)
 	{
@@ -85,12 +86,12 @@ void *ServerThread(void *args)
 		Directions directions = DecodeSensorData(
 			read[0], read[1]);
 
-		pthread_join(displayCameraThread, NULL);
+		pthread_detach(displayCameraThread);
 		// Set guides by readDataFromClient
 		int result = camera.SetGuides(directions);
 
 		// Play Warning Sound using threading
 		melodyArguments.play = result ? true : false;
-		pthread_join(melodyThread, NULL);
+		pthread_detach(melodyThread);
 	}
 }
