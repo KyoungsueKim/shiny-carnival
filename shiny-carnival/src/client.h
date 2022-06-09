@@ -1,9 +1,4 @@
-#ifndef CLIENT_H
-#define CLIENT_H
-
-bool clientInterrupt = false;
-
-#endif
+static bool clientInterrupt = false;
 
 
 void StartClient(int mode);

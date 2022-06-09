@@ -14,14 +14,12 @@ class Camera
 {
 private:
 	Directions directions;
-	bool interrupt = false;
 
 	cv::Mat img;
 
 public:
-	Camera();
-	~Camera();
 	int SetGuides(Directions directions);
+    void DisplayCamera();
 };
 
 #endif

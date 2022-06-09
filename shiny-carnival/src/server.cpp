@@ -12,12 +12,24 @@ typedef struct melodyThreadArguments
 	bool play;
 } melodyThreadArguments;
 
+typedef struct displayCameraThreadArguments
+{
+	Camera camera;
+} displayCameraThreadArguments;
+
 void *ServerThread(void *args);
 void StartServerThread()
 {
 	pthread_t serverThread;
 	pthread_create(&serverThread, NULL, ServerThread, NULL);
 	pthread_join(serverThread, NULL);
+}
+
+void *DisplayCameraThread(void *args){
+	displayCameraThreadArguments *arguments = (displayCameraThreadArguments *)args;
+	Camera camera = arguments->camera;
+
+	camera.DisplayCamera();
 }
 
 void *playPiezoThread(void *args)
@@ -43,13 +55,19 @@ void *ServerThread(void *args)
 
 	// melody 플레이 스레딩을 위한 전처리
 	pthread_t melodyThread;
-	struct melodyThreadArguments melodyArguments = {.melody = warningSound, .play = false};
+	melodyThreadArguments melodyArguments = {.melody = warningSound, .play = false};
 	pthread_create(&melodyThread, NULL, playPiezoThread, &melodyArguments);
+
+	// display Camera 스레딩을 위한 전처리
+	pthread_t displayCameraThread;
+	displayCameraThreadArguments displayCameraArguments = {.camera = camera};
+	pthread_create(&displayCameraThread, NULL, DisplayCameraThread, &displayCameraArguments);
+
 
 	ServerSocket serverSocket = ServerSocket();
 	for (int i = 0; i < sizeof(serverSocket.clientData) / sizeof(serverSocket.clientData[0]); i++)
 	{
-		printf("Server: %s connected", serverSocket.clientData[i].ip);
+		printf("Server: %s connected\n", serverSocket.clientData[i].ip);
 	}
 
 	while (true)
@@ -60,12 +78,14 @@ void *ServerThread(void *args)
 		{
 			int data = serverSocket.readDataFromClient(serverSocket.clientData[i]);
 			sprintf(read[i], "%d", data);
+			printf("read data: %s\n", read[i]);
 		}
 
 		// Decoding directions
 		Directions directions = DecodeSensorData(
 			read[0], read[1]);
 
+		pthread_join(displayCameraThread, NULL);
 		// Set guides by readDataFromClient
 		int result = camera.SetGuides(directions);
 
