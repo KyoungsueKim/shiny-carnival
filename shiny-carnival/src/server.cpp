@@ -6,13 +6,13 @@
 #include "sensor.h"
 #include "piezo.h"
 
-struct melodyThreadArguments {
+typedef struct melodyThreadArguments {
     Melody melody;
     bool play;
-};
+} melodyThreadArguments;
 
 void* ServerThread(void* args);
-void startServerThread(){
+void StartServerThread(){
     pthread_t serverThread;
     pthread_create(&serverThread, NULL, ServerThread, NULL);
     pthread_join(serverThread, NULL);
@@ -45,7 +45,7 @@ void* ServerThread(void* args){
     }
 
     while (true) {
-        //Read Data from Client
+        //Read Data from StartClient
         const char* read[CLIENT_NUMBERS];
         for(int i = 0; i < CLIENT_NUMBERS; i++){
             read[i] = serverSocket.readDataFromClient(serverSocket.clientData[i]);
@@ -65,4 +65,3 @@ void* ServerThread(void* args){
         pthread_join(melodyThread, NULL);
     }
 }
-

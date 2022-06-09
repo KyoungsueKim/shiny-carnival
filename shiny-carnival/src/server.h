@@ -1,1 +1,1 @@
-void startServerThread();
+void StartServerThread();
