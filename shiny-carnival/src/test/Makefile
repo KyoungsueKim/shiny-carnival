@@ -7,7 +7,7 @@ CC = g++
 $(NAME)	:	$(SERVER) $(CLIENT1) $(CLIENT2)
 
 $(SERVER)	:
-	$(CC) -w -o $(SERVER) server.cpp `pkg-config --cflags --libs opencv4` -lpthread
+	g++ -std=c++11 -w -o server server.cpp piezo.cpp pwm.cpp `pkg-config --cflags --libs opencv4` -lpthread
 
 $(CLIENT1) : 
 	$(CC) -w -o $(CLIENT1) client1.cpp

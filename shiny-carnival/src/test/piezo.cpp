@@ -2,8 +2,8 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <vector>
-#include "pwm.h"
-#include "piezo.h"
+#include "pwm.hpp"
+#include "piezo.hpp"
 
 void* Melody::playMelody(float duration){
     // PWM 0 Initialize
