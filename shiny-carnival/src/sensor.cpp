@@ -47,8 +47,8 @@
     int encodedData = (GPIORead(pin1) * shiftFactor1) + (GPIORead(pin2) * shiftFactor2) + (GPIORead(pin3) * shiftFactor3);
 
     // 메시지 리턴
-    static const char msg[5] = "";
-    sprintf(const_cast<char *>(msg), "%d", encodedData);
+    char* msg = (char*) malloc(sizeof(char) * 6);
+    sprintf(msg, "%d", encodedData);
     return msg;
 }
 
