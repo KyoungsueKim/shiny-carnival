@@ -58,9 +58,9 @@ class Melody {
         * Melody 오브젝트의 @melody 에 기록된 멜로디에 따라 음을 재생합니다.
         * @return : NULL 포인터
         */
-        static void playMelody(float duration);
+        void playMelody(float duration);
 
-        static void stopMelody();
+        void stopMelody();
 
         /***
          * 피에조의 음을 재생합니다. 음계와 지속시간을 설정해줄 수 있습니다.
