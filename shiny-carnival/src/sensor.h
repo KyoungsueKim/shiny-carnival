@@ -15,5 +15,5 @@ enum Mode{
     MODE_2 = 1
 };
 
-static const char* SensingWithEncoded(int mode);
-static Directions DecodeSensorData(const char* encodedData1, const char* encodedData2);
+const char* SensingWithEncoded(int mode);
+Directions DecodeSensorData(const char* encodedData1, const char* encodedData2);

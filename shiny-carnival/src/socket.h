@@ -3,35 +3,34 @@
 #define CLIENT_NUMBERS 2
 
 typedef struct client{
-	int fd;
-	char ip[30];
+    int fd;
+    char ip[30];
 } client;
 
 class ServerSocket {
-    private:
+private:
 
-        int serverFileDescriptor;
-        int receivedData;
+    int serverFileDescriptor;
+    int receivedData;
 
-        struct sockaddr_in serverAddress;
-        struct sockaddr_in clientAddress[CLIENT_NUMBERS];
+    struct sockaddr_in serverAddress;
+    struct sockaddr_in clientAddress[CLIENT_NUMBERS];
 
-    public:
-        client clientData[CLIENT_NUMBERS];
+public:
+    client clientData[CLIENT_NUMBERS];
 
-        ServerSocket();
-        ~ServerSocket();
-        const char* readDataFromClient(client client);
+    ServerSocket();
+    ~ServerSocket();
+    const char* readDataFromClient(client client);
 };
 
 class ClientSocket {
-    private:
-        int clientFileDescriptor;
-        struct sockaddr_in serverAddress;
+private:
+    int clientFileDescriptor;
+    struct sockaddr_in serverAddress;
 
-    public:
-        ClientSocket();
-        ~ClientSocket();
-        int sendDataToServer(const char *message);
+public:
+    ClientSocket();
+    ~ClientSocket();
+    int sendDataToServer(const char *message);
 };
-

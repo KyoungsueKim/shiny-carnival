@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <cstdio>
 
-static const char* SensingWithEncoded(int mode){
+ const char* SensingWithEncoded(int mode){
     int pin1, pin2, pin3, shiftFactor1, shiftFactor2, shiftFactor3;
 
     // 어느쪽 라즈베리파이인지 모드 설정
@@ -52,7 +52,7 @@ static const char* SensingWithEncoded(int mode){
     return msg;
 }
 
-static Directions DecodeSensorData(const char* encodedData1, const char* encodedData2){
+Directions DecodeSensorData(const char* encodedData1, const char* encodedData2){
     Directions decodedData = {.right = false, .front = false, .left = false};
 
     // 전처리

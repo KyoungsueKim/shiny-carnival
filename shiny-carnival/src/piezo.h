@@ -1,5 +1,4 @@
 #include <vector>
-
 typedef enum Scale
 {
     ZERO = 0,
@@ -31,7 +30,7 @@ typedef enum Scale
 } Scale;
 
 /***
- * Usage: 
+ * Usage:
  *      Melody basic = Melody();
  *      basic.melody = { C, D, E, F, G, A, B, highC };
         basic.playMelody(0.3);
@@ -45,27 +44,27 @@ typedef enum Scale
         warning.playMelody(0.3);
  */
 class Melody {
-    private:
-        bool nowPlaying;
+private:
+    bool nowPlaying;
 
-    public:
-        // warning melody
-        std::vector<int> melody = {E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, lowG, lowB, C, ZERO, ZERO, E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, C, lowB, lowA, ZERO, ZERO};
+public:
+    // warning melody
+    std::vector<int> melody = {E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, lowG, lowB, C, ZERO, ZERO, E, Dsharp, E, Dsharp, E, lowB, D, C, lowA, ZERO, ZERO, lowC, lowE, lowA, lowB, ZERO, lowE, C, lowB, lowA, ZERO, ZERO};
 
-        ~Melody();
+    ~Melody();
 
-        /*** 
-        * Melody 오브젝트의 @melody 에 기록된 멜로디에 따라 음을 재생합니다.
-        * @return : NULL 포인터
-        */
-        void playMelody(float duration);
+    /***
+    * Melody 오브젝트의 @melody 에 기록된 멜로디에 따라 음을 재생합니다.
+    * @return : NULL 포인터
+    */
+    void playMelody(float duration);
 
-        void stopMelody();
+    void stopMelody();
 
-        /***
-         * 피에조의 음을 재생합니다. 음계와 지속시간을 설정해줄 수 있습니다.
-         * @param scale : 재생을 원하는 음계 (Hz 단위)
-         * @param duration : 지속 시간
-         */
-        static void *piezo(int scale, float duration);
+    /***
+     * 피에조의 음을 재생합니다. 음계와 지속시간을 설정해줄 수 있습니다.
+     * @param scale : 재생을 원하는 음계 (Hz 단위)
+     * @param duration : 지속 시간
+     */
+    static void *piezo(int scale, float duration);
 };
