@@ -62,7 +62,7 @@ Directions DecodeSensorData(const char *encodedData1, const char *encodedData2)
 	int sensorData2 = (int)strtol(encodedData2, nullptr, 10);
 	if (sensorData1 == -1 || sensorData2 == -1)
 	{
-		printf("Decoding Sensor Data Occured!");
+		printf("Decoding Sensor Data Occured!\n");
 		return decodedData;
 	}
 

@@ -14,7 +14,7 @@ typedef struct melodyThreadArguments
 
 typedef struct displayCameraThreadArguments
 {
-	Camera camera;
+	Camera* camera;
 } displayCameraThreadArguments;
 
 void *ServerThread(void *args);
@@ -27,10 +27,10 @@ void StartServerThread()
 
 void *DisplayCameraThread(void *args){
 	displayCameraThreadArguments *arguments = (displayCameraThreadArguments *)args;
-	Camera camera = arguments->camera;
+	Camera *camera = arguments->camera;
 
 	while(1){
-		camera.DisplayCamera();
+		camera->DisplayCamera();
 	}
 }
 
@@ -62,7 +62,7 @@ void *ServerThread(void *args)
 
 	// display Camera 스레딩을 위한 전처리
 	pthread_t displayCameraThread;
-	displayCameraThreadArguments displayCameraArguments = {.camera = camera};
+	displayCameraThreadArguments displayCameraArguments = {.camera = &camera};
 	pthread_create(&displayCameraThread, NULL, DisplayCameraThread, &displayCameraArguments);
 
 	ServerSocket serverSocket = ServerSocket();

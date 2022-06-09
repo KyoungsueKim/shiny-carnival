@@ -106,6 +106,6 @@ ClientSocket::~ClientSocket()
 
 int ClientSocket::sendDataToServer(const char *message, int size)
 {
-	usleep(100000);
+	//usleep(100000);
 	return write(clientFileDescriptor, message, size);
 }

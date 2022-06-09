@@ -35,7 +35,7 @@ void Camera::DisplayCamera(){
         ellipse(img, cv::Point(640, 240), cv::Size(220.0, 70.0), 90, 0, 360, cv::Scalar(0, 0, 255), 5, 8);
     }
 
-    //cv::imshow("Camera", img);
+    cv::imshow("Camera", img);
 
     if(cv::waitKey(1) == 27){
         delete this;
