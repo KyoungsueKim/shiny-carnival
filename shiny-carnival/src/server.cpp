@@ -79,7 +79,6 @@ void *ServerThread(void *args)
 		{
 			int data = serverSocket.readDataFromClient(serverSocket.clientData[i]);
 			sprintf(read[i], "%d", data);
-			printf("read data: %s\n", read[i]);
 		}
 
 		// Decoding directions

@@ -67,19 +67,19 @@ Directions DecodeSensorData(const char *encodedData1, const char *encodedData2)
 	}
 
 	// 왼쪽 접근일 경우
-	if (sensorData1 & (0b000001) || sensorData1 & (0b000010))
+	if (sensorData1 & (0b000001) && sensorData1 & (0b000010))
 	{
 		decodedData.left = true;
 	}
 
 	// 앞쪽 접근일 경우
-	if (sensorData1 & (0b000100) || sensorData2 & (0b001000))
+	if (sensorData1 & (0b000100) && sensorData2 & (0b001000))
 	{
 		decodedData.front = true;
 	}
 
 	// 오른쪽 접근일 경우
-	if (sensorData2 & (0b010000) || sensorData2 & (0b100000))
+	if (sensorData2 & (0b010000) && sensorData2 & (0b100000))
 	{
 		decodedData.right = true;
 	}
